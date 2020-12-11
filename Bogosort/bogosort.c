@@ -56,6 +56,8 @@ int main(void) {
 	puts("Sorted array:");
 	print_array(arr, count);
 	
+	fclose(file);
+	
 	
 	return 0;
 }
