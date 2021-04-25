@@ -1,10 +1,9 @@
 #include <iostream>
 #include "MyLinkedList.h"
 #include "Lambdas.h"
-#include "utils.h"
 #include <string>
 #include <vector>
-#include <time.h>  
+#include <ctime>
 #include <algorithm>
 
 void test() {
@@ -13,13 +12,12 @@ void test() {
     srand(time(nullptr));
     int values[1000];
 
-    for (int i = 0; i < 1000; i++) {
-        values[i] = rand() % 50;
+    for (int &value : values) {
+        value = rand() % 50;
     }
 
     // filling MyLinkedList
-    for (int i = 0; i < 1000; i++) {
-        int val = values[i];
+    for (int val : values) {
         if (!list.remove(val))
             list.insert(val);
     }
@@ -27,9 +25,7 @@ void test() {
     print(list.toString());
 
     //filling normal vector
-    for(int i = 0; i < 1000; i++) {
-        int val = values[i];
-
+    for (int val : values) {
         // search for element and remove if found
         auto it = std::find(vec.begin(), vec.end(), val);
         if (it != vec.end())
@@ -50,8 +46,7 @@ void test() {
 
 }
 
-int main()
-{
+int main(int argc, char **argv) {
     test();
     return 0;
 }

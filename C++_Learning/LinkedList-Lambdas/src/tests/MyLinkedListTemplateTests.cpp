@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "./MyLinkedList.h"
+#include "../MyLinkedList.h"
 #include <string>
 
 TEST(MyLinkedListTemplateTest, TestInitial) {
