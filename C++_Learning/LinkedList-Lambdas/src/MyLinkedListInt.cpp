@@ -16,31 +16,30 @@ MyLinkedListInt::MyLinkedListInt() {
 
 void MyLinkedListInt::insert(int value) {
     if (!this->start) {
-        this->start = std::make_shared<LL_Member>(value);
-        this->end = this->start;
+        this->start = std::make_unique<LL_Member>(value);
+        this->end = this->start.get();
     } else {
-        std::shared_ptr<LL_Member> old_end = this->end;
-        this->end = std::shared_ptr<LL_Member>(new LL_Member(value));
-        old_end->next = this->end;
+        this->end->next = std::make_unique<LL_Member>(value);
+        this->end = this->end->next.get();
     }
     this->length++;
 }
 
 bool MyLinkedListInt::remove(int val) {
-    std::shared_ptr<LL_Member> current = this->start;
-    std::shared_ptr<LL_Member> previous = nullptr;
+    LL_Member * current = this->start.get();
+    LL_Member * previous = nullptr;
     for (unsigned long i = 0; i < this->length; i++) {
         if (current->value == val) {
             // check whether list holds more than one element
             if (this->length > 1) {
                 if (previous) {
-                    previous->next = current->next;
+                    previous->next = std::move(current->next);
                     // update end pointer if necessary
                     if (current == this->end)
                         this->end = previous;
                 } else {
                     // removing first element
-                    this->start = this->start->next;
+                    this->start = std::move(this->start->next);
                 }
             } else
                 this->start = nullptr;
@@ -49,7 +48,7 @@ bool MyLinkedListInt::remove(int val) {
             return true;
         }
         previous = current;
-        current = current->next;
+        current = current->next.get();
     }
     return false;
 }

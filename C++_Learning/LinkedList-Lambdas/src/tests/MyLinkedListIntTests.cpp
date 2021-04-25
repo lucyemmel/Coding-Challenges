@@ -4,7 +4,7 @@
 TEST(MyLinkedListIntTest, TestInitial) {
 	MyLinkedListInt l{};
 	EXPECT_EQ(l.length, 0);
-	EXPECT_EQ(l.start, l.end);
+	EXPECT_EQ(l.start.get(), l.end);
 	EXPECT_EQ(l.start, nullptr);
 }
 
