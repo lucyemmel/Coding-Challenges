@@ -1,0 +1,4 @@
+from https://leetcode.com/problems/isomorphic-strings/ (205)
+
+Time complexity: O(n) where n is length of String s (or t as they are the same)
+Space complexity: O(n) due to the isomorphingMap containing up to n chars from String s
